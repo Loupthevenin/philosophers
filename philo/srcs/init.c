@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:45:43 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/30 18:49:14 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/31 15:27:32 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@ static t_philo	*set_new_philo(t_arg_philo arg_philo,
 		return (NULL);
 	new_philo->id = i + 1;
 	new_philo->arg_philo = arg_philo;
+	new_philo->kill_philo = 0;
+	new_philo->times_eaten = 0;
 	pthread_mutex_init(&new_philo->fork, NULL);
 	new_philo->print_mutex = print_mutex;
 	new_philo->next = NULL;
 	return (new_philo);
 }
 
-void	init_args(t_arg_philo *arg_philo, int argc, char **argv)
+void	init_args(t_arg_philo *arg_philo, int argc, char **argv,
+		long start_time)
 {
 	arg_philo->number_of_philosophers = ft_atoi(argv[1]);
 	arg_philo->time_to_die = ft_atoi(argv[2]);
@@ -39,6 +42,7 @@ void	init_args(t_arg_philo *arg_philo, int argc, char **argv)
 		arg_philo->is_count_eat = -1;
 	else
 		arg_philo->is_count_eat = ft_atoi(argv[5]);
+	arg_philo->start_time = start_time;
 }
 
 t_philo	*init_philo(t_arg_philo arg_philo, pthread_mutex_t *print_mutex)

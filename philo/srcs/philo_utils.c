@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:53:44 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/29 20:54:22 by ltheveni         ###   ########.fr       */
+/*   Updated: 2024/12/30 20:54:43 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return (result);
+}
+
+long long	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
