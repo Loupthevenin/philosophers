@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:45:43 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/31 15:27:32 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:23:30 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_philo	*set_new_philo(t_arg_philo arg_philo,
 	new_philo->kill_philo = 0;
 	new_philo->times_eaten = 0;
 	pthread_mutex_init(&new_philo->fork, NULL);
+	pthread_mutex_init(&new_philo->lock, NULL);
 	new_philo->print_mutex = print_mutex;
 	new_philo->next = NULL;
 	return (new_philo);
@@ -39,9 +40,9 @@ void	init_args(t_arg_philo *arg_philo, int argc, char **argv,
 	arg_philo->time_to_eat = ft_atoi(argv[3]);
 	arg_philo->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 5)
-		arg_philo->is_count_eat = -1;
+		arg_philo->nb_meals = -1;
 	else
-		arg_philo->is_count_eat = ft_atoi(argv[5]);
+		arg_philo->nb_meals = ft_atoi(argv[5]);
 	arg_philo->start_time = start_time;
 }
 
