@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 11:59:14 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/31 16:27:38 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:26:48 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	cleanup_philo(t_philo *head, int n)
 		tmp = current;
 		current = current->next;
 		pthread_mutex_destroy(&tmp->fork);
+		pthread_mutex_destroy(&tmp->lock);
 		free(tmp);
 		i++;
 	}
@@ -50,27 +51,27 @@ static void	create_thread(t_philo *head, int n)
 	t_philo		*current;
 	int			i;
 	pthread_t	*philo_thread;
+	pthread_t	kill_threads;
 
 	i = 0;
 	current = head;
 	philo_thread = (pthread_t *)malloc(sizeof(pthread_t) * n);
 	if (!philo_thread)
-	{
 		return ;
-	}
 	while (i < n)
 	{
 		pthread_create(&philo_thread[i], NULL, philosopher_routine, current);
 		current = current->next;
 		i++;
 	}
-	kill_philo(head);
+	pthread_create(&kill_threads, NULL, kill_philo, head);
 	i = 0;
 	while (i < n)
 	{
 		pthread_join(philo_thread[i], NULL);
 		i++;
 	}
+	pthread_detach(kill_threads);
 	free(philo_thread);
 }
 
