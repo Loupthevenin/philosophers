@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:42:54 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/05 10:13:49 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:22:29 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	check_args(int argc, char **argv)
 	int	i;
 
 	i = 1;
+	if (ft_atoi(argv[2]) == 0)
+		return (0);
 	while (i < argc)
 	{
 		if (!is_digit(argv[i]))
