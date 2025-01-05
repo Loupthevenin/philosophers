@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 20:39:38 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/04 16:31:11 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/05 10:38:20 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	philo_eat(t_philo *philo)
 	{
 		take_fork(philo, 1);
 		down_fork(philo, 1);
-		usleep(philo->arg_philo.time_to_die * 1000);
+		ft_usleep(philo->arg_philo.time_to_die);
 		return ;
 	}
 	take_fork(philo, 0);
@@ -80,7 +80,7 @@ void	philo_eat(t_philo *philo)
 	philo->times_eaten++;
 	philo->last_meal_time = time;
 	pthread_mutex_unlock(&philo->lock);
-	usleep(philo->arg_philo.time_to_eat * 1000);
+	ft_usleep(philo->arg_philo.time_to_eat);
 	down_fork(philo, 0);
 }
 
@@ -91,7 +91,7 @@ void	philo_sleep(t_philo *philo)
 		printf("%d %d is sleeping\n", (int)(get_time()
 					- philo->arg_philo.start_time), philo->id);
 	pthread_mutex_unlock(philo->print_mutex);
-	usleep(philo->arg_philo.time_to_sleep * 1000);
+	ft_usleep(philo->arg_philo.time_to_sleep);
 }
 
 void	philo_think(t_philo *philo)

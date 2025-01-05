@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:39:40 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/05 10:11:11 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/05 10:35:11 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 int					is_digit(const char *s);
 long				ft_atoi(char *str);
 long long			get_time(void);
+void				ft_usleep(long int time_to_sleep_in_ms);
 int					is_philo_killed(t_philo *philo);
 void				init_args(t_arg_philo *arg_philo, int argc, char **argv,
 						long start_time);
