@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:27:10 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/01 17:42:22 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:13:29 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	kill_loop(t_philo *head, int start_time, int time_to_die,
 {
 	t_philo	*current;
 	int		time;
+	int		diff_time;
 	int		count;
 
 	current = head;
@@ -64,8 +65,10 @@ static void	kill_loop(t_philo *head, int start_time, int time_to_die,
 	while (count < max_count)
 	{
 		time = get_time() - start_time;
-		if (time - current->last_meal_time > time_to_die
-			&& !current->kill_philo)
+		pthread_mutex_lock(&current->lock);
+		diff_time = time - current->last_meal_time;
+		pthread_mutex_unlock(&current->lock);
+		if (diff_time > time_to_die && !current->kill_philo)
 		{
 			set_kill_philo(current, time);
 			count++;

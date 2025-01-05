@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:53:44 by ltheveni          #+#    #+#             */
-/*   Updated: 2024/12/30 20:54:43 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/05 10:10:54 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	is_digit(const char *s)
 	return (1);
 }
 
-int	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
-	int	i;
-	int	result;
+	int		i;
+	long	result;
 
 	i = 0;
 	result = 0;
