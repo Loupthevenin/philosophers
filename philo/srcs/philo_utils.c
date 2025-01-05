@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:53:44 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/05 10:10:54 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/05 10:33:25 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,18 @@ long long	get_time(void)
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	ft_usleep(long int time_to_sleep_in_ms)
+{
+	long long	max_sleep;
+	long long	time;
+
+	max_sleep = get_time() + time_to_sleep_in_ms;
+	time = get_time();
+	while (max_sleep > time)
+	{
+		usleep(time_to_sleep_in_ms / 10);
+		time = get_time();
+	}
 }
