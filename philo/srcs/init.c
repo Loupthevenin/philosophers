@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:45:43 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/01 15:23:30 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:31:00 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_philo	*set_new_philo(t_arg_philo arg_philo,
 	new_philo->arg_philo = arg_philo;
 	new_philo->kill_philo = 0;
 	new_philo->times_eaten = 0;
+	new_philo->last_meal_time = 0;
 	pthread_mutex_init(&new_philo->fork, NULL);
 	pthread_mutex_init(&new_philo->lock, NULL);
 	new_philo->print_mutex = print_mutex;
