@@ -19,7 +19,7 @@ static void	take_fork(t_philo *philo, int one_philo)
 		pthread_mutex_lock(&philo->fork);
 		pthread_mutex_lock(philo->print_mutex);
 		printf("%d %d has taken a fork\n", (int)(get_time()
-					- philo->arg_philo.start_time), philo->id);
+				- philo->arg_philo.start_time), philo->id);
 		pthread_mutex_unlock(philo->print_mutex);
 		return ;
 	}
@@ -36,7 +36,7 @@ static void	take_fork(t_philo *philo, int one_philo)
 	pthread_mutex_lock(philo->print_mutex);
 	if (!is_philo_killed(philo))
 		printf("%d %d has taken a fork\n", (int)(get_time()
-					- philo->arg_philo.start_time), philo->id);
+				- philo->arg_philo.start_time), philo->id);
 	pthread_mutex_unlock(philo->print_mutex);
 }
 
@@ -89,7 +89,7 @@ void	philo_sleep(t_philo *philo)
 	pthread_mutex_lock(philo->print_mutex);
 	if (!is_philo_killed(philo))
 		printf("%d %d is sleeping\n", (int)(get_time()
-					- philo->arg_philo.start_time), philo->id);
+				- philo->arg_philo.start_time), philo->id);
 	pthread_mutex_unlock(philo->print_mutex);
 	ft_usleep(philo->arg_philo.time_to_sleep);
 }
@@ -99,6 +99,6 @@ void	philo_think(t_philo *philo)
 	pthread_mutex_lock(philo->print_mutex);
 	if (!is_philo_killed(philo))
 		printf("%d %d is thinking\n", (int)(get_time()
-					- philo->arg_philo.start_time), philo->id);
+				- philo->arg_philo.start_time), philo->id);
 	pthread_mutex_unlock(philo->print_mutex);
 }

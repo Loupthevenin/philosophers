@@ -6,41 +6,31 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:27:10 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/04 16:13:29 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:09:49 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-/* static int	check_food(t_philo *head) */
-/* { */
-/* 	t_philo	*current; */
-/* 	int		count; */
-/* 	int		max_eat; */
-/**/
-/* 	current = head; */
-/* 	count = 0; */
-/* 	max_eat = head->arg_philo.is_count_eat; */
-/* 	while (current) */
-/* 	{ */
-/* 		if (current->times_eaten >= max_eat) */
-/* 		{ */
-/* 			if (!current->kill_philo) */
-/* 				current->kill_philo = 1; */
-/* 			count++; */
-/* 		} */
-/* 		if (current->next == head) */
-/* 			break ; */
-/* 		current = current->next; */
-/* 	} */
-/* 	return (count); */
-/* } */
+static int	check_food(t_philo *philo, int max_eat)
+{
+	int	times_eaten;
 
-/* if (current->arg_philo.nb_meals != -1) */
-/* { */
-/* 	if (check_food(philo) == philo->arg_philo.number_of_philosophers) */
-/* 		break ; */
-/* } */
+	pthread_mutex_lock(&philo->lock);
+	times_eaten = philo->times_eaten;
+	pthread_mutex_unlock(&philo->lock);
+	if (times_eaten >= max_eat)
+	{
+		if (!philo->kill_philo)
+		{
+			pthread_mutex_lock(&philo->lock);
+			philo->kill_philo = 1;
+			pthread_mutex_unlock(&philo->lock);
+			return (1);
+		}
+	}
+	return (0);
+}
 
 static void	set_kill_philo(t_philo *philo, int time)
 {
@@ -73,6 +63,8 @@ static void	kill_loop(t_philo *head, int start_time, int time_to_die,
 			set_kill_philo(current, time);
 			count++;
 		}
+		if (current->arg_philo.nb_meals != -1)
+			count += check_food(current, current->arg_philo.nb_meals);
 		current = current->next;
 	}
 }

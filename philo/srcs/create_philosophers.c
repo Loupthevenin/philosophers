@@ -6,25 +6,11 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 11:59:14 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/01 17:26:48 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:25:38 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-/* static void	print_philo(t_philo *head) */
-/* { */
-/* 	t_philo	*current; */
-/**/
-/* 	current = head; */
-/* 	while (current) */
-/* 	{ */
-/* 		printf("Philosophers id :%d\n", current->id); */
-/* 		if (current->next == head) */
-/* 			break ; */
-/* 		current = current->next; */
-/* 	} */
-/* } */
 
 static void	cleanup_philo(t_philo *head, int n)
 {

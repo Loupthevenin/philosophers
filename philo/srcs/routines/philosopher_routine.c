@@ -39,7 +39,7 @@ void	*philosopher_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	flag_routines = choice_start(philo->id,
-									philo->arg_philo.number_of_philosophers);
+			philo->arg_philo.number_of_philosophers);
 	while (!is_philo_killed(philo))
 	{
 		if (flag_routines == 2)
