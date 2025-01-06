@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 20:39:38 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/05 10:38:20 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/06 09:27:19 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	philo_eat(t_philo *philo)
 	{
 		take_fork(philo, 1);
 		down_fork(philo, 1);
-		ft_usleep(philo->arg_philo.time_to_die);
+		ft_usleep(philo->arg_philo.time_to_die + 10);
 		return ;
 	}
 	take_fork(philo, 0);

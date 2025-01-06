@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 11:59:14 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/05 11:25:38 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/06 09:19:08 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	create_thread(t_philo *head, int n)
 		pthread_join(philo_thread[i], NULL);
 		i++;
 	}
-	pthread_detach(kill_threads);
+	pthread_join(kill_threads, NULL);
 	free(philo_thread);
 }
 
