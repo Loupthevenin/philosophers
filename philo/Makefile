@@ -6,7 +6,7 @@
 #    By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/29 19:37:12 by ltheveni          #+#    #+#              #
-#    Updated: 2025/01/01 16:34:56 by ltheveni         ###   ########.fr        #
+#    Updated: 2025/01/06 09:06:35 by ltheveni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ fclean:
 
 re: fclean all
 
-debug: CFLAGS += -fsanitize=address $(DEBUG_FLAGS)
+debug: CFLAGS += -fsanitize=thread $(DEBUG_FLAGS)
 debug: re
 	@printf "$(_BLUE)Debug build done$(_END)\n"
 
