@@ -6,11 +6,33 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 11:59:14 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/18 16:25:49 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:14:48 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+static void	print_meal(t_philo *philo)
+{
+	int	i;
+	int	required_meals;
+	int	all_ok;
+
+	i = 0;
+	all_ok = 1;
+	required_meals = philo->arg_philo.nb_meals;
+	while (i < philo->arg_philo.number_of_philosophers)
+	{
+		if (philo->times_eaten < required_meals)
+			all_ok = 0;
+		philo = philo->next;
+		i++;
+	}
+	if (all_ok)
+		printf("Each philosopher ate %d time(s)\n", required_meals);
+	else
+		printf("Not all philosopher ate %d time(s)\n", required_meals);
+}
 
 static void	cleanup_philo(t_philo *head, int n)
 {
@@ -73,5 +95,7 @@ void	create_philosophers(t_arg_philo arg_philo)
 	pthread_mutex_init(&print_mutex, NULL);
 	philo = init_philo(arg_philo, &print_mutex);
 	create_thread(philo, philo->arg_philo.number_of_philosophers);
+	if (philo->arg_philo.nb_meals != -1)
+		print_meal(philo);
 	cleanup_philo(philo, philo->arg_philo.number_of_philosophers);
 }
