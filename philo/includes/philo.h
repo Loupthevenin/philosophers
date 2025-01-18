@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:39:40 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/18 11:53:11 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:49:03 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void				init_args(t_arg_philo *arg_philo, int argc, char **argv,
 t_philo				*init_philo(t_arg_philo arg_philo, pthread_mutex_t *mutex);
 int					check_food(t_philo *philo, int max_eat);
 void				set_all_kill_philo(t_philo *head);
+int					is_philo_all_killed(t_philo *head);
 
 void				philo_eat(t_philo *philo);
 void				philo_sleep(t_philo *philo);
