@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:32:03 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/01 18:10:53 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:44:20 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,18 @@ int	is_philo_killed(t_philo *philo)
 {
 	int	result;
 
-	pthread_mutex_lock(&philo->lock);
-	result = philo->kill_philo;
-	pthread_mutex_unlock(&philo->lock);
+	pthread_mutex_lock(&philo->arg_philo.simulation_lock);
+	result = philo->arg_philo.simulation_end;
+	pthread_mutex_unlock(&philo->arg_philo.simulation_lock);
 	return (result);
 }
 
-void	*philosopher_routine(void *arg)
+static void	*philo_loop(int flag_routines, t_philo *philo)
 {
-	t_philo	*philo;
-	int		flag_routines;
-
-	philo = (t_philo *)arg;
-	flag_routines = choice_start(philo->id,
-			philo->arg_philo.number_of_philosophers);
-	while (!is_philo_killed(philo))
+	while (1)
 	{
+		if (is_philo_killed(philo))
+			break ;
 		if (flag_routines == 2)
 		{
 			philo_eat(philo);
@@ -59,4 +55,15 @@ void	*philosopher_routine(void *arg)
 		}
 	}
 	return (NULL);
+}
+
+void	*philosopher_routine(void *arg)
+{
+	t_philo	*philo;
+	int		flag_routines;
+
+	philo = (t_philo *)arg;
+	flag_routines = choice_start(philo->id,
+			philo->arg_philo.number_of_philosophers);
+	return (philo_loop(flag_routines, philo));
 }

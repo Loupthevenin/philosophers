@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 20:39:38 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/06 09:27:19 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:46:32 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,7 @@ static void	take_fork(t_philo *philo, int one_philo)
 		pthread_mutex_lock(&philo->next->fork);
 		pthread_mutex_lock(&philo->fork);
 	}
-	pthread_mutex_lock(philo->print_mutex);
-	if (!is_philo_killed(philo))
-		printf("%d %d has taken a fork\n", (int)(get_time()
-				- philo->arg_philo.start_time), philo->id);
-	pthread_mutex_unlock(philo->print_mutex);
+	print_fork(philo);
 }
 
 static void	down_fork(t_philo *philo, int one_philo)
@@ -77,10 +73,13 @@ void	philo_eat(t_philo *philo)
 		printf("%d %d is eating\n", time, philo->id);
 	pthread_mutex_unlock(philo->print_mutex);
 	pthread_mutex_lock(&philo->lock);
-	philo->times_eaten++;
 	philo->last_meal_time = time;
 	pthread_mutex_unlock(&philo->lock);
 	ft_usleep(philo->arg_philo.time_to_eat);
+	pthread_mutex_lock(&philo->lock);
+	philo->times_eaten++;
+	philo->last_meal_time = (int)(get_time() - philo->arg_philo.start_time);
+	pthread_mutex_unlock(&philo->lock);
 	down_fork(philo, 0);
 }
 

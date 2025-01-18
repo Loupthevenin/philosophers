@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:39:40 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/05 10:35:11 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:53:11 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ typedef struct s_arg_philo
 	int				time_to_sleep;
 	int				nb_meals;
 	long			start_time;
+	int				simulation_end;
+	pthread_mutex_t	simulation_lock;
 }					t_arg_philo;
 
 typedef struct s_philo
 {
 	int				id;
 	t_arg_philo		arg_philo;
-	int				kill_philo;
 	int				times_eaten;
 	int				last_meal_time;
 	pthread_mutex_t	fork;
@@ -46,11 +47,14 @@ typedef struct s_philo
 int					is_digit(const char *s);
 long				ft_atoi(char *str);
 long long			get_time(void);
+void				print_fork(t_philo *philo);
 void				ft_usleep(long int time_to_sleep_in_ms);
 int					is_philo_killed(t_philo *philo);
 void				init_args(t_arg_philo *arg_philo, int argc, char **argv,
 						long start_time);
 t_philo				*init_philo(t_arg_philo arg_philo, pthread_mutex_t *mutex);
+int					check_food(t_philo *philo, int max_eat);
+void				set_all_kill_philo(t_philo *head);
 
 void				philo_eat(t_philo *philo);
 void				philo_sleep(t_philo *philo);
