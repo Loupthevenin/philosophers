@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:53:44 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/17 17:46:05 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:04:18 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void	print_fork(t_philo *philo)
 	pthread_mutex_lock(philo->print_mutex);
 	if (!is_philo_killed(philo))
 	{
-		printf("%d %d has taken a fork\n", (int)(get_time()
-				- philo->arg_philo.start_time), philo->id);
 		printf("%d %d has taken a fork\n", (int)(get_time()
 				- philo->arg_philo.start_time), philo->id);
 	}

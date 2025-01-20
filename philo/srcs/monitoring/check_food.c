@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 11:12:28 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/18 18:10:54 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/20 09:18:27 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	check_food(t_philo *philo, int max_eat)
 {
 	int	times_eaten;
 
-	pthread_mutex_lock(&philo->lock);
+	pthread_mutex_lock(&philo->lock_eaten);
 	times_eaten = philo->times_eaten;
-	pthread_mutex_unlock(&philo->lock);
+	pthread_mutex_unlock(&philo->lock_eaten);
 	if (times_eaten >= max_eat)
 	{
 		pthread_mutex_lock(&philo->arg_philo.simulation_lock);

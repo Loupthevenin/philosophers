@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:27:10 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/18 19:41:34 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/20 09:18:11 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void	kill_loop(t_philo *head, int start_time, int time_to_die)
 		if (is_philo_all_killed(current))
 			return ;
 		time = get_time() - start_time;
-		pthread_mutex_lock(&current->lock);
+		pthread_mutex_lock(&current->lock_meal);
 		diff_time = time - current->last_meal_time;
-		pthread_mutex_unlock(&current->lock);
+		pthread_mutex_unlock(&current->lock_meal);
 		pthread_mutex_lock(&current->arg_philo.simulation_lock);
 		simulation_end = current->arg_philo.simulation_end;
 		pthread_mutex_unlock(&current->arg_philo.simulation_lock);
