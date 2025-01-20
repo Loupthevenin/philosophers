@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 11:59:14 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/18 17:14:48 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/20 08:58:11 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,13 @@ static void	cleanup_philo(t_philo *head, int n)
 		current = current->next;
 		pthread_mutex_destroy(&tmp->fork);
 		pthread_mutex_destroy(&tmp->lock);
-		pthread_mutex_destroy(&tmp->arg_philo.simulation_lock);
-		if (tmp->print_mutex)
-			pthread_mutex_destroy(tmp->print_mutex);
 		free(tmp);
 		i++;
 		if (current == head)
 			break ;
 	}
+	pthread_mutex_destroy(&tmp->arg_philo.simulation_lock);
+	pthread_mutex_destroy(tmp->print_mutex);
 }
 
 static void	create_thread(t_philo *head, int n)
