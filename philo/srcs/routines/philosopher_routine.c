@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:32:03 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/18 16:44:20 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:04:03 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ static int	choice_start(int id, int number_of_philosophers)
 		return (2);
 	else
 		return (0);
+}
+
+void	set_value_meal(t_philo *philo, int value)
+{
+	pthread_mutex_lock(&philo->lock_meal);
+	philo->last_meal_time = value;
+	pthread_mutex_unlock(&philo->lock_meal);
 }
 
 int	is_philo_killed(t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:39:40 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/18 17:49:03 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:02:35 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef struct s_philo
 	int				times_eaten;
 	int				last_meal_time;
 	pthread_mutex_t	fork;
-	pthread_mutex_t	lock;
+	pthread_mutex_t	lock_meal;
+	pthread_mutex_t	lock_eaten;
 	pthread_mutex_t	*print_mutex;
 	struct s_philo	*next;
 }					t_philo;
@@ -48,6 +49,7 @@ int					is_digit(const char *s);
 long				ft_atoi(char *str);
 long long			get_time(void);
 void				print_fork(t_philo *philo);
+void				set_value_meal(t_philo *philo, int value);
 void				ft_usleep(long int time_to_sleep_in_ms);
 int					is_philo_killed(t_philo *philo);
 void				init_args(t_arg_philo *arg_philo, int argc, char **argv,

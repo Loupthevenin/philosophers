@@ -6,7 +6,7 @@
 /*   By: ltheveni <ltheveni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 20:39:38 by ltheveni          #+#    #+#             */
-/*   Updated: 2025/01/18 18:22:51 by ltheveni         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:03:03 by ltheveni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ static void	take_fork(t_philo *philo, int one_philo)
 	if (philo->id < philo->next->id)
 	{
 		pthread_mutex_lock(&philo->fork);
+		print_fork(philo);
 		pthread_mutex_lock(&philo->next->fork);
+		print_fork(philo);
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->next->fork);
+		print_fork(philo);
 		pthread_mutex_lock(&philo->fork);
+		print_fork(philo);
 	}
-	print_fork(philo);
 }
 
 static void	down_fork(t_philo *philo, int one_philo)
@@ -66,20 +69,20 @@ void	philo_eat(t_philo *philo)
 		ft_usleep(philo->arg_philo.time_to_die + 10);
 		return ;
 	}
-	take_fork(philo, 0);
-	pthread_mutex_lock(philo->print_mutex);
 	time = (int)(get_time() - philo->arg_philo.start_time);
+	pthread_mutex_lock(philo->print_mutex);
 	if (!is_philo_killed(philo))
 		printf("%d %d is eating\n", time, philo->id);
 	pthread_mutex_unlock(philo->print_mutex);
-	pthread_mutex_lock(&philo->lock);
-	philo->last_meal_time = time;
-	pthread_mutex_unlock(&philo->lock);
+	take_fork(philo, 0);
+	set_value_meal(philo, time);
 	ft_usleep(philo->arg_philo.time_to_eat);
-	pthread_mutex_lock(&philo->lock);
+	pthread_mutex_lock(&philo->lock_eaten);
 	philo->times_eaten++;
+	pthread_mutex_unlock(&philo->lock_eaten);
+	pthread_mutex_lock(&philo->lock_meal);
 	philo->last_meal_time = (int)(get_time() - philo->arg_philo.start_time);
-	pthread_mutex_unlock(&philo->lock);
+	pthread_mutex_unlock(&philo->lock_meal);
 	down_fork(philo, 0);
 }
 
